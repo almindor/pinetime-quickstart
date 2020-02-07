@@ -6,12 +6,12 @@ extern crate panic_halt;
 
 use rt::entry;
 use nrf52832_hal::prelude::*;
+use cortex_m_semihosting::hprintln;
 
 #[entry]
-unsafe fn main() -> ! {    
+unsafe fn main() -> ! {
+    hprintln!("Start of main").unwrap();
     loop {
-        // Delay pause;
-
-        // pause.delay_ms(1000u16);
+        continue;
     }
 }
