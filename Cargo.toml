@@ -1,0 +1,28 @@
+[package]
+name = "pinetime-quickstart"
+version = "0.1.0"
+authors = ["Ales Katona <almindor@gmail.com>"]
+edition = "2018"
+
+categories = ["embedded", "hardware-support", "no-std"]
+keywords = ["arm", "cortex-m", "nrf52", "hal", "nrf52832"]
+license = "Apache-2.0"
+
+[dependencies]
+cortex-m-rt = "0.6.12"
+panic-halt = "0.2.0"
+
+[dependencies.nrf52832-hal]
+version = "0.8.1"
+default-features = false
+features = ["xxAA-package", "rt"]
+
+[[bin]]
+name = "pinetime-quickstart"
+test = false
+bench = false
+
+[profile.release]
+codegen-units = 1 # better optimizations
+debug = true # symbols are nice and they don't increase the size on Flash
+lto = true # better optimizations
