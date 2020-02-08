@@ -17,5 +17,5 @@ monitor reset
 # load program
 load
 
-# start the process but immediately halt the processor
-stepi
+# start the process
+continue
