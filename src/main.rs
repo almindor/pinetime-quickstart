@@ -6,12 +6,19 @@ extern crate panic_halt;
 
 use rt::entry;
 use nrf52832_hal::prelude::*;
-use cortex_m_semihosting::hprintln;
+use nrf52832_hal::Delay;
+use nrf52832_hal::nrf52832_pac::CorePeripherals;
+use cortex_m_semihosting::{hprint, hprintln};
 
 #[entry]
 unsafe fn main() -> ! {
+    let core = CorePeripherals::take().unwrap();
+    let mut delay = Delay::new(core.SYST);
+
     hprintln!("Start of main").unwrap();
+
     loop {
-        continue;
+        delay.delay_ms(1000u16);
+        hprint!(".").unwrap();
     }
 }
