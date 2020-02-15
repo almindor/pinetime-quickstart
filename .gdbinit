@@ -8,9 +8,8 @@ set backtrace limit 32
 
 # Enable jlink semihosting
 monitor semihosting enable
-# monitor flash breakpoints 1
-# telnet
-# monitor semihosting IOClient 3
+# hprints
+monitor semihosting IOClient 3
 
 monitor reset
 
