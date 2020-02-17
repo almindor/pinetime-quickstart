@@ -31,3 +31,12 @@ You should run `JLinkExe` for first time so you can unlock the "locked flash/ram
 #### OpenOCD
 
 *TODO*
+
+### Running
+
+The main program is just an endless wait loop, not too interresting.
+
+There are currently these examples, run them with `cargo run --release --example <name>`
+
+1. `display` - renders some basic primitives on a blue background
+2. `display_ferris` - draws ferris over a black background
