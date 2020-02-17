@@ -41,3 +41,4 @@ There are currently these examples, run them with `cargo run --release --example
 1. `display` - renders some basic primitives on a blue background
 2. `display_ferris` - draws ferris over a black background
 3. `systemoff` - shuts down to low power mode
+4. `battery_status` - one time battery info to semihosting printlns
