@@ -55,7 +55,7 @@ fn main() -> ! {
     let black = (0, 0, 0);
     
     let blank = Rectangle::new(Point::new(0, 0), Point::new(239, 239)).into_styled(PrimitiveStyle::with_fill(Rgb565::BLACK));
-    let raw_image_data = ImageRaw::<Rgb565>::new(include_bytes!("../assets/ferris.raw"), 86, 64);
+    let raw_image_data = ImageRawLE::new(include_bytes!("../assets/ferris.raw"), 86, 64);
     let ferris = Image::new(&raw_image_data, Point::new(34, 8));
 
     // draw two circles on blue background
