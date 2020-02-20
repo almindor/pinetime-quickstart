@@ -9,11 +9,13 @@ extern crate panic_halt;
 use cortex_m_rt::entry;
 use embedded_graphics::prelude::*;
 use embedded_graphics::primitives::*;
+use embedded_graphics::style::*;
+use embedded_graphics::pixelcolor::Rgb565;
 use nrf52832_hal::gpio::Level;
 use nrf52832_hal::gpio::*;
 use nrf52832_hal::spim;
 use nrf52832_hal::Delay;
-use st7735_lcd::{ST7735, Orientation};
+use st7789::{ST7789, Orientation};
 use cortex_m_semihosting::hprintln;
 
 #[entry]
@@ -42,25 +44,21 @@ fn main() -> ! {
     let spi = spim::Spim::new(p.SPIM0, pins, spim::Frequency::M8, spim::MODE_3, 122);
 
     // create driver
-    let mut display = ST7735::new(spi, dc, rst, true, true);
+    let mut display = ST7789::new(spi, dc, rst, 240, 240);
 
     // initialize
     display.init(&mut delay).unwrap();
     // set default orientation
     display.set_orientation(&Orientation::Portrait).unwrap();
 
-    let green = (0, 255, 0);
-    let blue = (0, 0, 255);
-    let red = (255, 0, 0);
-    
-    let blank = Rectangle::new(Coord::new(0, 0), Coord::new(239, 239)).fill(Some(blue.into()));
-    let circle1 = Circle::new(Coord::new(128, 64), 64).fill(Some(red.into()));
-    let circle2 = Circle::new(Coord::new(64, 64), 64).stroke(Some(green.into()));
+    let blank = Rectangle::new(Point::new(0, 0), Point::new(239, 239)).into_styled(PrimitiveStyle::with_fill(Rgb565::BLACK));
+    let circle1 = Circle::new(Point::new(128, 64), 64).into_styled(PrimitiveStyle::with_fill(Rgb565::RED));
+    let circle2 = Circle::new(Point::new(64, 64), 64).into_styled(PrimitiveStyle::with_stroke(Rgb565::GREEN, 1));
 
     // draw two circles on blue background
-    display.draw(blank);
-    display.draw(circle1);
-    display.draw(circle2);
+    blank.draw(&mut display).unwrap();
+    circle1.draw(&mut display).unwrap();
+    circle2.draw(&mut display).unwrap();
 
     hprintln!("Rendering done").unwrap();
 
