@@ -50,7 +50,7 @@ fn main() -> ! {
     // initialize
     display.init(&mut delay).unwrap();
     // set default orientation
-    display.set_orientation(&Orientation::Portrait).unwrap();
+    display.set_orientation(&Orientation::Landscape).unwrap();
 
     let black = (0, 0, 0);
     

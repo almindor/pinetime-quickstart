@@ -49,7 +49,7 @@ fn main() -> ! {
     // initialize
     display.init(&mut delay).unwrap();
     // set default orientation
-    display.set_orientation(&Orientation::Portrait).unwrap();
+    display.set_orientation(&Orientation::Landscape).unwrap();
 
     let blank = Rectangle::new(Point::new(0, 0), Point::new(239, 239)).into_styled(PrimitiveStyle::with_fill(Rgb565::BLACK));
     let circle1 = Circle::new(Point::new(128, 64), 64).into_styled(PrimitiveStyle::with_fill(Rgb565::RED));
