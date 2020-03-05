@@ -11,11 +11,11 @@ license = "Apache-2.0"
 [dependencies]
 cortex-m = "0.6.2"
 cortex-m-rt = "0.6.12"
-embedded-graphics = "0.6.0-beta.1"
+embedded-graphics = { git = "https://github.com/jamwaffles/embedded-graphics.git" }
 embedded-hal = "0.2.3"
 cortex-m-semihosting = "0.3.5"
 panic-halt = "0.2.0"
-st7789 = "0.1.0"
+st7789 = { git = "https://github.com/almindor/st7789.git" }
 
 [dependencies.nrf52832-hal]
 version = "0.8.1"
