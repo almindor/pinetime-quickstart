@@ -13,7 +13,7 @@ use embedded_graphics::style::PrimitiveStyle;
 use embedded_graphics::image::*;
 use embedded_graphics::pixelcolor::Rgb565;
 use nrf52832_hal::gpio::Level;
-use nrf52832_hal::gpio::*;
+use nrf52832_hal::gpio::{*, p0::Parts};
 use nrf52832_hal::spim;
 use nrf52832_hal::Delay;
 use st7789::{ST7789, Orientation};
@@ -21,11 +21,11 @@ use cortex_m_semihosting::hprintln;
 
 #[entry]
 fn main() -> ! {
-    let core = nrf52832_hal::nrf52832_pac::CorePeripherals::take().unwrap();
+    let core = nrf52832_hal::pac::CorePeripherals::take().unwrap();
     let mut delay = Delay::new(core.SYST);
 
-    let p = nrf52832_hal::nrf52832_pac::Peripherals::take().unwrap();
-    let port0 = p.P0.split();
+    let p = nrf52832_hal::pac::Peripherals::take().unwrap();
+    let port0 = Parts::new(p.P0);
 
     let _backlight = port0.p0_22.into_push_pull_output(Level::Low); // set medium backlight on
     let rst = port0.p0_26.into_push_pull_output(Level::Low); // reset pin
@@ -56,7 +56,7 @@ fn main() -> ! {
     
     let blank = Rectangle::new(Point::new(0, 0), Point::new(239, 239)).into_styled(PrimitiveStyle::with_fill(Rgb565::BLACK));
     let raw_image_data = ImageRawLE::new(include_bytes!("../assets/ferris.raw"), 86, 64);
-    let ferris = Image::new(&raw_image_data, Point::new(34, 8));
+    let ferris = Image::new(&raw_image_data, Point::new(64, 64));
 
     // draw two circles on blue background
     blank.draw(&mut display).unwrap();

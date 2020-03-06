@@ -24,7 +24,8 @@ git = "https://github.com/jamwaffles/embedded-graphics.git"
 rev = "4da5554"
 
 [dependencies.nrf52832-hal]
-version = "0.8.1"
+git = "https://github.com/nrf-rs/nrf52-hal"
+rev = "899899f"
 default-features = false
 features = ["xxAA-package", "rt"]
 
@@ -32,3 +33,8 @@ features = ["xxAA-package", "rt"]
 name = "pinetime-quickstart"
 test = false
 bench = false
+
+[profile.release]
+codegen-units = 1 # better optimizations
+debug = true # symbols are nice and they don't increase the size on Flash
+lto = true # better optimizations
