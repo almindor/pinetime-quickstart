@@ -24,8 +24,7 @@ Flashing the device removes the closed-source OS that comes with PineTime. I'm n
 
 You should run `JLinkExe` for first time so you can unlock the "locked flash/ram" on the PineTime. A prompt should pop up, if not check if your Segger software is up to date. Once the re-flash is done you can continue using `JLinkGDBServer` as shown below:
 
-1. Run `JLinkGDBServer -device NRF52832_XXAA -if SWD -speed 4000 -port 3333 -nogui`
-    1a. You might get a pop up if using JLink Mini-Edu that needs to be accepted once per day
+1. Run `JLinkGDBServer -device NRF52832_XXAA -if SWD -speed 4000 -port 3333 -nogui` You might get a pop up if using JLink Mini-Edu that needs to be accepted once per day
 2. Once `JLinkGDBServer` is connected you should be good to go and just use `cargo run` to execute the main program. Use the examples as required.
 
 #### OpenOCD
