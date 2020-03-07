@@ -22,7 +22,7 @@ use cortex_m_semihosting::hprintln;
 #[entry]
 fn main() -> ! {
     let core = nrf52832_hal::nrf52832_pac::CorePeripherals::take().unwrap();
-    let mut delay = Delay::new(core.SYST);
+    let delay = Delay::new(core.SYST);
 
     let p = nrf52832_hal::nrf52832_pac::Peripherals::take().unwrap();
     let port0 = p.P0.split();
@@ -45,10 +45,10 @@ fn main() -> ! {
     let spi = spim::Spim::new(p.SPIM0, pins, spim::Frequency::M8, spim::MODE_3, 122);
 
     // create driver
-    let mut display = ST7789::new(spi, dc, rst, 240, 240);
+    let mut display = ST7789::new(spi, dc, rst, 240, 240, delay);
 
     // initialize
-    display.init(&mut delay).unwrap();
+    display.init().unwrap();
     // set default orientation
     display.set_orientation(&Orientation::Landscape).unwrap();
 
