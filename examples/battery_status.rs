@@ -8,13 +8,13 @@ extern crate panic_halt;
 
 use cortex_m_rt::entry;
 
-use embedded_hal::digital::v2::InputPin;
+use cortex_m_semihosting::hprintln;
 use embedded_hal::adc::OneShot;
-use nrf52832_hal::prelude::_embedded_hal_blocking_delay_DelayMs;
+use embedded_hal::digital::v2::InputPin;
 use nrf52832_hal::gpio::*;
+use nrf52832_hal::prelude::_embedded_hal_blocking_delay_DelayMs;
 use nrf52832_hal::saadc::*;
 use nrf52832_hal::Delay;
-use cortex_m_semihosting::hprintln;
 
 #[entry]
 fn main() -> ! {
