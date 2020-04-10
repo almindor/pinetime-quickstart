@@ -7,17 +7,17 @@ extern crate nrf52832_hal;
 extern crate panic_halt;
 
 use cortex_m_rt::entry;
+use cortex_m_semihosting::hprintln;
+use embedded_graphics::image::*;
+use embedded_graphics::pixelcolor::Rgb565;
 use embedded_graphics::prelude::*;
 use embedded_graphics::primitives::*;
 use embedded_graphics::style::PrimitiveStyle;
-use embedded_graphics::image::*;
-use embedded_graphics::pixelcolor::Rgb565;
 use nrf52832_hal::gpio::Level;
 use nrf52832_hal::gpio::*;
 use nrf52832_hal::spim;
 use nrf52832_hal::Delay;
-use st7789::{ST7789, Orientation};
-use cortex_m_semihosting::hprintln;
+use st7789::{Orientation, ST7789};
 
 #[entry]
 fn main() -> ! {
@@ -53,8 +53,9 @@ fn main() -> ! {
     display.set_orientation(&Orientation::Landscape).unwrap();
 
     let black = (0, 0, 0);
-    
-    let blank = Rectangle::new(Point::new(0, 0), Point::new(239, 239)).into_styled(PrimitiveStyle::with_fill(Rgb565::BLACK));
+
+    let blank = Rectangle::new(Point::new(0, 0), Point::new(239, 239))
+        .into_styled(PrimitiveStyle::with_fill(Rgb565::BLACK));
     let raw_image_data = ImageRawLE::new(include_bytes!("../assets/ferris.raw"), 86, 64);
     let ferris = Image::new(&raw_image_data, Point::new(34, 8));
 
