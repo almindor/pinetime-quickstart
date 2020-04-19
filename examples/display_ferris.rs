@@ -52,8 +52,6 @@ fn main() -> ! {
     // set default orientation
     display.set_orientation(&Orientation::Landscape).unwrap();
 
-    let black = (0, 0, 0);
-
     let blank = Rectangle::new(Point::new(0, 0), Point::new(239, 239))
         .into_styled(PrimitiveStyle::with_fill(Rgb565::BLACK));
     let raw_image_data = ImageRawLE::new(include_bytes!("../assets/ferris.raw"), 86, 64);
