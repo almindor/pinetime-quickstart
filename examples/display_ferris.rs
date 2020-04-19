@@ -11,8 +11,6 @@ use cortex_m_semihosting::hprintln;
 use embedded_graphics::image::*;
 use embedded_graphics::pixelcolor::Rgb565;
 use embedded_graphics::prelude::*;
-use embedded_graphics::primitives::*;
-use embedded_graphics::style::PrimitiveStyle;
 use nrf52832_hal::gpio::Level;
 use nrf52832_hal::gpio::*;
 use nrf52832_hal::spim;
@@ -52,13 +50,11 @@ fn main() -> ! {
     // set default orientation
     display.set_orientation(&Orientation::Landscape).unwrap();
 
-    let blank = Rectangle::new(Point::new(0, 0), Point::new(239, 239))
-        .into_styled(PrimitiveStyle::with_fill(Rgb565::BLACK));
     let raw_image_data = ImageRawLE::new(include_bytes!("../assets/ferris.raw"), 86, 64);
     let ferris = Image::new(&raw_image_data, Point::new(34, 8));
 
     // draw two circles on blue background
-    blank.draw(&mut display).unwrap();
+    display.clear(Rgb565::BLACK).unwrap();
     ferris.draw(&mut display).unwrap();
 
     hprintln!("Rendering done").unwrap();
