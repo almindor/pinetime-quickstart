@@ -33,6 +33,10 @@ fn main() -> ! {
     hprintln!("Charging: {}", charging).unwrap();
 
     let adc_i16 = saadc.read(&mut adc).unwrap();
+    if adc_i16 < 0 {
+        panic!("Unexpected ADC raw value");
+    }
+
     let adc_val: u32 = (adc_i16 as u16).into(); // keep as 32bit for multiplication
 
     hprintln!("Raw ADC_V: {}", adc_val).unwrap();
